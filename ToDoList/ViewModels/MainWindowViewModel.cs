@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ToDoList.DataModel;
 using ToDoList.Services;
+using ToDoList.Views;
 
 namespace ToDoList.ViewModels
 {
@@ -16,10 +17,14 @@ namespace ToDoList.ViewModels
         {
             var service = new FoodItemService();
             FoodItem = new FoodItemViewModel(service.GetItems());
-            _contentViewModel = FoodItem;
+            Plan = new PlanViewModel();
+            GoalView = new GoalViewModel();
+            _contentViewModel = new MenuViewModel();
         }
 
+        public GoalViewModel GoalView { get; }
         public FoodItemViewModel FoodItem { get; }
+        public PlanViewModel Plan { get;  }
         
         public ViewModelBase ContentViewModel
         {
@@ -27,6 +32,25 @@ namespace ToDoList.ViewModels
             private set => this.RaiseAndSetIfChanged(ref _contentViewModel, value);
         }
 
+        public void Goal()
+        {
+            ContentViewModel = GoalView;
+        }
+        public void Parents()
+        {
+            ContentViewModel = FoodItem;
+        }
+
+        public void Meals()
+        {
+            ContentViewModel = Plan;
+        }
+
+        public void MainMenu()
+        {
+            ContentViewModel = new MenuViewModel();
+        }
+        
         public void AddItem()
         {
             AddItemViewModel addItemViewModel = new();

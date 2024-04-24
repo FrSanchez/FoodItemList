@@ -3,20 +3,57 @@
              xmlns:vm="using:ToDoList.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="using:ToDoList.DataModel"
+             xmlns:converters="clr-namespace:ToDoList.Converters"
              mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="450"
              x:Class="ToDoList.Views.AddItemView"
              x:DataType="vm:AddItemViewModel">
+    <UserControl.Resources>
+        <converters:FoodCategoryConverter x:Key="FoodCategoryConverter"/>
+    </UserControl.Resources>
+
     <DockPanel>
-        <Button DockPanel.Dock="Bottom" 
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Command="{Binding CancelCommand}">Cancel</Button>
-        <Button DockPanel.Dock="Bottom" 
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Command="{Binding OkCommand}">OK</Button>
-        <TextBox AcceptsReturn="True"
-                 Text="{Binding Name}"
-                 Watermark="Enter your to do item"/>
+            <Button DockPanel.Dock="Bottom" 
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding CancelCommand}">Cancel</Button>
+            <Button DockPanel.Dock="Bottom" 
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding OkCommand}">OK</Button>
+        <DockPanel DockPanel.Dock="Bottom" Margin="100">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBox AcceptsReturn="True"
+                         Text="{Binding Name}"
+                         Watermark="Enter your to do item"/>
+                <StackPanel Margin="20">
+                        <TextBlock Text="{Binding #Serving.Value, StringFormat={}{0:0.0%}}"
+                                   HorizontalAlignment="Center"/>
+                        <Slider Value="{Binding Serving}"
+                                x:Name="Serving"
+                                Minimum="0" Maximum="1"/>
+                </StackPanel>
+                <Label Content="Food Categories:"/>
+                <ListBox x:Name="FoodCategoryInput"
+                         SelectionMode="Multiple,Toggle" ItemsSource="{Binding Categories}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="model:FoodCategory">
+                            <StackPanel>
+                                <Image Source="{Binding Converter={StaticResource FoodCategoryConverter}, ConverterParameter=32}"
+                                       Width="32" Height="32"/>
+                                <Label Content="{Binding}" FontSize="12"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                </ListBox>
+            </StackPanel>
+            
+        </DockPanel>
     </DockPanel>
 </UserControl>

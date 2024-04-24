@@ -7,7 +7,7 @@
         x:Class="ToDoList.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Content="{Binding ContentViewModel}"
         Width="1000" Height="600"
+        Content="{Binding ContentViewModel}"
         Title="ToDoList">
 </Window>

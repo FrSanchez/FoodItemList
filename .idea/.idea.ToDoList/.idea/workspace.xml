@@ -7,18 +7,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02bc7405-7f01-47ca-90f8-7aac247ff512" name="Changes" comment="" />
+    <list default="true" id="02bc7405-7f01-47ca-90f8-7aac247ff512" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/GoalViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/MenuViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Views/GoalView.axaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Views/GoalView.axaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Views/PlanView.axaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Views/PlanView.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/avalonia.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/avalonia.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/ViewModels/AddItemViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/ViewModels/AddItemViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/Views/FoodItemView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/FoodItemView.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/MainWindow.axaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/83/75c41649/Type.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/ef/83eebd5e/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/f4/388f3226/Enum.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/269d7d1aae2c0bd2828a96569dffc9bcae7356740fa229fe793ad9e1533f9/Bitmap.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/409cbfc595ab24b2b1e4ef5d337095fd49bee59162968f6af6a45fb1feb9f287/StyledElement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/49302399778be8eddd550e51d8f27dd5a9a8ecd52db38738ca2587bc74032a1/ControlExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/67d798838f534f8da38ced1ba32d39251b0a00/_0e9c1/IBitmap.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b21c24939672291599689d402153f7aeb1d89ddad93cfe4e38d2868832399e7/DataGridBoundColumn.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e2a429f38cfae242ebe16e4e658a31e3a188d3b79c6e243298c5f81814aacc9/IReactiveObjectExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e4e751551a50c3c03634212c4d666bf30983e4fa3fb6b5c8250d524f53775e8/CompiledBindingExtension.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ec8b2f683931cc54bae0c2b21ab7c1acc21d7b9eb0c58818cef4e7b8f6e1a1e3/AssetLoader.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -36,6 +59,7 @@
     ".NET Project.ToDoList.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,7 +104,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713877053367</updated>
-      <workItem from="1713877054399" duration="11938000" />
+      <workItem from="1713877054399" duration="21181000" />
     </task>
     <servers />
   </component>
@@ -94,17 +118,17 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ToDoList/Converters/FoodCategoryConverter.cs</url>
-          <line>18</line>
-          <properties documentPath="$PROJECT_DIR$/ToDoList/Converters/FoodCategoryConverter.cs" initialLine="18" containingFunctionPresentation="Method 'Convert'">
+          <url>file://$PROJECT_DIR$/ToDoList/ViewModels/AddItemViewModel.cs</url>
+          <line>27</line>
+          <properties documentPath="$PROJECT_DIR$/ToDoList/ViewModels/AddItemViewModel.cs" initialLine="21" containingFunctionPresentation="Lambda expression inside Constructor 'AddItemViewModel'">
             <startOffsets>
-              <option value="441" />
+              <option value="876" />
             </startOffsets>
             <endOffsets>
-              <option value="476" />
+              <option value="926" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

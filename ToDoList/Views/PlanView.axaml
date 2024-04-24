@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ToDoList.Views.PlanView">
+<DockPanel Margin="20" HorizontalAlignment="Center">
+    <Button DockPanel.Dock="Bottom"
+            HorizontalAlignment="Center" Width="300"
+            HorizontalContentAlignment="Center"
+            x:CompileBindings="False"
+            Command="{Binding $parent[Window].DataContext.MainMenu}">
+        Main Menu
+    </Button>
+    <Separator DockPanel.Dock="Bottom"></Separator>
+</DockPanel>
+</UserControl>

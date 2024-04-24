@@ -12,13 +12,29 @@
         <converters:ItemUnitConverter x:Key="ItemUnitConverter" />
         <converters:FoodCategoryConverter x:Key="FoodCategoryConverter"/>
     </UserControl.Resources>
-    <DockPanel>
+    <DockPanel Margin="20" HorizontalAlignment="Center">
         <Button DockPanel.Dock="Bottom"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Center" Width="300"
+                HorizontalContentAlignment="Center"
+                x:CompileBindings="False"
+                Command="{Binding $parent[Window].DataContext.MainMenu}">
+            Main Menu
+        </Button>
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center" Width="300"
+                HorizontalContentAlignment="Center"
+                x:CompileBindings="False"
+                Command="{Binding $parent[Window].DataContext.Goal}">
+            Edit Goal
+        </Button>
+
+        <Separator DockPanel.Dock="Bottom"></Separator>
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center" Width="300"
                 HorizontalContentAlignment="Center"
                 x:CompileBindings="False"
                 Command="{Binding $parent[Window].DataContext.AddItem}">
-            Add Item
+            Add Food Item
         </Button>
         <DataGrid ItemsSource="{Binding ListItems}"
                   IsReadOnly="True"
@@ -55,16 +71,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <!-- <ItemsControl ItemsSource="{Binding ListItems}"> -->
-        <!--     <ItemsControl.ItemTemplate> -->
-        <!--         <DataTemplate> -->
-        <!--             <StackPanel> -->
-        <!--                 <CheckBox Margin="4" -->
-        <!--                           IsChecked="{Binding IsChecked}" -->
-        <!--                           Content="{Binding Name}"/> -->
-        <!--             </StackPanel> -->
-        <!--         </DataTemplate> -->
-        <!--     </ItemsControl.ItemTemplate> -->
-        <!-- </ItemsControl> -->
     </DockPanel>
 </UserControl>
