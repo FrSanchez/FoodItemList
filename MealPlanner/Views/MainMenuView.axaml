@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MealPlanner.Views.MainMenuView">
+    <DockPanel Margin="50">
+        <Button DockPanel.Dock="Top" 
+                HorizontalAlignment="Stretch"
+                x:CompileBindings="False"
+                Command="{Binding $parent[Window].DataContext.Parents}"
+                HorizontalContentAlignment="Center">
+            <StackPanel>
+                <Image Source="/Assets/fridge_menu.png" Width="200"/>
+                <Label Content="Parents"/>
+            </StackPanel>
+        </Button>
+        <Button  DockPanel.Dock="Bottom"
+                 HorizontalAlignment="Stretch"
+                 x:CompileBindings="False"
+                 Command="{Binding $parent[Window].DataContext.Meals}"
+                 HorizontalContentAlignment="Center">
+            <StackPanel>
+                <Image Source="/Assets/food_menu.png" Width="400"/>
+                <Label Content="Meals"/>
+            </StackPanel>
+        </Button>
+    </DockPanel>
+</UserControl>

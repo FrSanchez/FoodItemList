@@ -1,0 +1,100 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:MealPlanner.ViewModels"
+             xmlns:utils="using:MealPlanner.Converters"
+             xmlns:converters="clr-namespace:MealPlanner.Converters"
+             xmlns:foodStuff="clr-namespace:PlannerEngine.FoodStuff;assembly=PlannerEngine"
+             xmlns:models="clr-namespace:MealPlanner.Models"
+             x:DataType="vm:FoodItemViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MealPlanner.Views.FoodItemView">
+    <UserControl.Resources>
+        <utils:FoodCategoriesConverter x:Key="FoodCategoriesConverter"/>
+        <utils:FoodCategoryImageConverter  x:Key="FoodCategoryImageConverter"/>
+        <utils:ItemUnitConverter x:Key="ItemUnitConverter"/>
+    </UserControl.Resources>
+    <DockPanel Margin="20">
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center" Width="300"
+                HorizontalContentAlignment="Center"
+                x:CompileBindings="False"
+                Command="{Binding $parent[Window].DataContext.MainMenu}">
+            Main Menu
+        </Button>
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center" Width="300"
+                HorizontalContentAlignment="Center"
+                x:CompileBindings="False"
+                Command="{Binding $parent[Window].DataContext.Goal}">
+            Edit Goal
+        </Button>
+
+        <Separator DockPanel.Dock="Bottom"></Separator>
+
+        <Button DockPanel.Dock="Bottom"
+                HorizontalAlignment="Center" Width="300"
+                HorizontalContentAlignment="Center"
+                x:CompileBindings="False"
+                Command="{Binding $parent[Window].DataContext.AddItem}">
+            Add Food Item
+        </Button>
+        
+        <DataGrid DockPanel.Dock="Top"
+            ItemsSource="{Binding ListItems}"
+            IsReadOnly="True"
+            Name="Grid"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
+            CanUserSortColumns="True"
+            GridLinesVisibility="All"
+            IsVisible="True"
+            DoubleTapped="Grid_OnDoubleTapped"
+            BorderThickness="1" BorderBrush="Gray">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Serving %" Binding="{Binding ServingSize,
+                    StringFormat={}{0:0.0%}}" />
+                <DataGridTextColumn Header="Units" Binding="{Binding Unit,
+                    Converter={StaticResource ItemUnitConverter}}"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, 
+                StringFormat={}{0:0}}"/>
+                <DataGridTemplateColumn Header="Categories">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="models:FoodItemModel">
+                            <ListBox ItemsSource="{Binding Categories}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate DataType="foodStuff:FoodCategory">
+                                        <StackPanel>
+                                            <Image Source="{Binding Converter={StaticResource FoodCategoryImageConverter}, ConverterParameter=28}"/>
+                                            <Label Content="{Binding Converter={StaticResource FoodCategoryImageConverter}}" FontSize="8"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- <ItemsControl ItemsSource="{Binding ListItems}"> -->
+        <!--     <ItemsControl.ItemTemplate> -->
+        <!--         <DataTemplate> -->
+        <!--             <StackPanel Orientation="Horizontal"> -->
+        <!--                 <Label Content="{Binding Name}"/> -->
+        <!--                 <Label Content="{Binding ServingSize, StringFormat={}{0:0.0%}}"/> -->
+        <!--                 <Label Content="{Binding Unit}"/> -->
+        <!--                 <Label Content="{Binding Categories, Converter={StaticResource FoodCategoriesConverter}}"/> -->
+        <!--             </StackPanel> -->
+        <!-- -->
+        <!--         </DataTemplate> -->
+        <!--     </ItemsControl.ItemTemplate> -->
+        <!-- </ItemsControl> -->
+    </DockPanel>
+</UserControl>
