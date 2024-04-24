@@ -2,15 +2,16 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+using System;
 using PlannerEngine.FoodStuff;
 using PlannerEngine.PlateStuff;
 using PlannerEngine.Units;
 
 namespace MealPlanner.ViewModels;
 
-public class PlateItemViewModel : ViewModelBase
+public class PlateItemViewModel : ViewModelBase, ICloneable
 {
-    
+
     public PlateItemViewModel(PlateItem item)
     {
         this.Quantity = item.Qty;
@@ -29,4 +30,9 @@ public class PlateItemViewModel : ViewModelBase
     public string Name { get; set; }
 
     public double Quantity { get; set; }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
 }

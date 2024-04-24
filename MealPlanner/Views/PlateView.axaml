@@ -3,11 +3,124 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:MealPlanner.ViewModels"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
+             xmlns:b="using:MealPlanner.Behaviors"
+             xmlns:foodStuff="clr-namespace:PlannerEngine.FoodStuff;assembly=PlannerEngine"
+             xmlns:utils="using:MealPlanner.Converters"
              x:DataType="vm:PlateViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MealPlanner.Views.PlateView">
     
-    <StackPanel Spacing="5" Width="300" Height="100">
+  <UserControl.Resources>
+    <utils:FoodCategoriesConverter x:Key="FoodCategoriesConverter"/>
+    <utils:FoodCategoryImageConverter  x:Key="FoodCategoryImageConverter"/>
+    <utils:ItemUnitConverter x:Key="ItemUnitConverter"/>
+    <!-- IconGrabber, MIT License, author: Primer, taken from: https://www.svgrepo.com/svg/347759/grabber -->
+    <PathGeometry x:Key="IconGrabberGeometry">M15 18a1 1 0 100-2 1 1 0 000 2zm1-6a1 1 0 11-2 0 1 1 0 012 0zm-7 6a1 1 0 100-2 1 1 0 000 2zm0-5a1 1 0 100-2 1 1 0 000 2zm7-6a1 1 0 11-2 0 1 1 0 012 0zM9 8a1 1 0 100-2 1 1 0 000 2z</PathGeometry>
+    <GeometryDrawing x:Key="IconGrabber" Brush="Black" Geometry="{StaticResource IconGrabberGeometry}" />
+  </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="ListBox.ItemsDragAndDrop">
+            <Style.Resources>
+                <b:ItemsListBoxDropHandler x:Key="ItemsListBoxDropHandler" />
+            </Style.Resources>
+            <Setter Property="(i:Interaction.Behaviors)">
+                <i:BehaviorCollectionTemplate>
+                    <i:BehaviorCollection>
+                        <idd:ContextDropBehavior Handler="{StaticResource ItemsListBoxDropHandler}" />
+                    </i:BehaviorCollection>
+                </i:BehaviorCollectionTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="ListBox.ItemsDragAndDrop ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="(i:Interaction.Behaviors)">
+                <i:BehaviorCollectionTemplate>
+                    <i:BehaviorCollection>
+                        <idd:ContextDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+                    </i:BehaviorCollection>
+                </i:BehaviorCollectionTemplate>
+            </Setter>
+        </Style>
+        
+        
+    <Style Selector="DataGrid.DragAndDrop">
+      <Style.Resources>
+        <b:ItemsDataGridDropHandler x:Key="ItemsDataGridDropHandler" />
+      </Style.Resources>
+      <Setter
+        Property="RowHeaderWidth"
+        Value="24" />
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="DataGrid.DragAndDrop DataGridRow.DraggingUp">
+      <Setter Property="AdornerLayer.Adorner">
+        <Template>
+          <Border BorderThickness="0 2 0 0" BorderBrush="{DynamicResource SystemAccentColor}"/>
+        </Template>
+      </Setter>
+    </Style>
+  
+    <Style Selector="DataGrid.DragAndDrop DataGridRow.DraggingDown">
+      <Setter Property="AdornerLayer.Adorner">
+        <Template>
+          <Border BorderThickness="0 0 0 2" BorderBrush="{DynamicResource SystemAccentColor}"/>
+        </Template>
+      </Setter>
+    </Style>
+  
+    <!-- This makes only the DataGridRowHeader available for dragging, instead of making the entire row draggable -->
+    <!-- Which prevents a conflict between text selection in a cell and drag-and-drop -->
+    <Style Selector="DataGrid.DragAndDrop DataGridRowHeader">
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <b:ContextDragWithDirectionBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+      <Setter Property="Content">
+        <Template>
+          <Image
+            Margin="12,0,12,0"
+            Width="12"
+            Height="12"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+            <Image.Source>
+              <!-- Use your own image here, I used this: https://www.svgrepo.com/svg/347759/grabber -->
+              <DrawingImage Drawing="{StaticResource IconGrabber}" />
+            </Image.Source>
+          </Image>
+        </Template>
+      </Setter>
+    </Style>
+
+    <Style Selector="DataGrid.ItemsDragAndDrop">
+      <Style.Resources>
+        <b:ItemsDataGridDropHandler x:Key="ItemsDataGridDropHandler" />
+      </Style.Resources>
+      <Setter Property="(i:Interaction.Behaviors)">
+        <i:BehaviorCollectionTemplate>
+          <i:BehaviorCollection>
+            <idd:ContextDropBehavior Handler="{StaticResource ItemsDataGridDropHandler}" />
+          </i:BehaviorCollection>
+        </i:BehaviorCollectionTemplate>
+      </Setter>
+    </Style>
+    
+    </UserControl.Styles>
+    <StackPanel Spacing="5" >
         <TextBox Text="{Binding Meal}"/>
         <DataGrid Name="PlateGrid" ItemsSource="{Binding PlateItems}"
                   AutoGenerateColumns="False" 
@@ -15,11 +128,33 @@
                   CanUserResizeColumns="True"
                   CanUserSortColumns="False"
                   GridLinesVisibility="All"
-                  BorderThickness="1" BorderBrush="Gray">
+                  BorderThickness="1" BorderBrush="Gray"
+                  Classes="DragAndDrop ItemsDragAndDrop">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Item.Name}"/>
-                <DataGridTextColumn Header="Categories" Binding="{Binding Item.Categories}"/>
-                <DataGridTextColumn Header="Unit" Binding="{Binding Item.Unit}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTemplateColumn Header="Categories">
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="vm:PlateItemViewModel">
+                      <ListBox ItemsSource="{Binding Categories}">
+                        <ListBox.ItemTemplate>
+                          <DataTemplate DataType="foodStuff:FoodCategory">
+                            <StackPanel>
+                              <Image Source="{Binding Converter={StaticResource FoodCategoryImageConverter}, ConverterParameter=16}"/>
+                              <Label Content="{Binding }" FontSize="8"/>
+                            </StackPanel>
+                          </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                          <ItemsPanelTemplate>
+                            <WrapPanel/>
+                          </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                      </ListBox>
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>                
+                <DataGridTextColumn Header="Unit" Binding="{Binding Unit, Converter={StaticResource ItemUnitConverter}}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Quantity}"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

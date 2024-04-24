@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using MealPlanner.Models;
 using PlannerEngine.FoodStuff;
 using PlannerEngine.GoalStuff;
 using PlannerEngine.PlanStuff;
@@ -30,17 +31,28 @@ public class DailyPlannerViewModel : ViewModelBase
         {
             listPlates.Add(new PlateViewModel(plate));
         }
+
+        var fridgeItems = new List<FridgeItemViewModel>();
+        foreach (var item in fridge.InFridge)
+        {
+            fridgeItems.Add(new FridgeItemViewModel(
+                item.Value, fridge.GetFoodItemQuantity(item.Key)));
+        }
+
+        this.FridgeItems = new ObservableCollection<FridgeItemViewModel>(fridgeItems);
         this.Plates = new ObservableCollection<PlateViewModel>(listPlates);
     }
+
     public ObservableCollection<PlateViewModel> Plates { get; }
-    
+    public ObservableCollection<FridgeItemViewModel> FridgeItems { get; }
+
     public DateTime Date
     {
         get => this.date;
         set => this.date = value;
     }
-    
+
     public DailyGoal Goal => this.goal;
-    
+
     public Fridge MadeFridge { get; }
 }

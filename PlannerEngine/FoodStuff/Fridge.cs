@@ -15,7 +15,7 @@ public class Fridge
     // Where the items go.
 
     // Easiser way of identifying items in fridge.
-    private Dictionary<long, double> qtyFridge;
+    public Dictionary<long, double> QtyFridge { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Fridge"/> class.
@@ -23,7 +23,7 @@ public class Fridge
     public Fridge()
     {
         this.InFridge = [];
-        this.qtyFridge = [];
+        this.QtyFridge = [];
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class Fridge
     /// <exception cref="ItemNotFoundException">ItemNotFoundException.</exception>
     public double GetFoodItemQuantity(long id)
     {
-        if (this.qtyFridge.TryGetValue(id, out var value))
+        if (this.QtyFridge.TryGetValue(id, out var value))
         {
             // Since tuples are immutable, we'll just quickly make a new tuple
             return value;
@@ -65,17 +65,17 @@ public class Fridge
         double quantity)
     {
         // If the item is already in the fridge, we'll just update the quantity.
-        if (this.qtyFridge.TryGetValue(item.Id, out var value))
+        if (this.QtyFridge.TryGetValue(item.Id, out var value))
         {
             // Since tuples are immutable, we'll just quickly make a new tuple
-            this.qtyFridge[item.Id] += quantity;
+            this.QtyFridge[item.Id] += quantity;
         }
 
         // Add the item to the fridge.
         else
         {
             this.InFridge.Add(item.Id, item);
-            this.qtyFridge.Add(item.Id, quantity);
+            this.QtyFridge.Add(item.Id, quantity);
         }
     }
 
@@ -100,7 +100,7 @@ public class Fridge
         }
 
         this.InFridge.Remove(itemId);
-        this.qtyFridge.Remove(itemId);
+        this.QtyFridge.Remove(itemId);
     }
 
     /// <summary>
@@ -131,15 +131,15 @@ public class Fridge
         }
 
         // If the fridge contains the correct quantity
-        if (this.qtyFridge[itemId] < qty)
+        if (this.QtyFridge[itemId] < qty)
         {
             throw new InvalidQuantityException(itemId.ToString() + qty);
         }
 
-        this.qtyFridge[itemId] -= qty;
+        this.QtyFridge[itemId] -= qty;
 
         // If getting stuff from the fridge means there's now no more items left.
-        if (this.qtyFridge[itemId] > 0)
+        if (this.QtyFridge[itemId] > 0)
         {
             return value;
         }
@@ -158,14 +158,14 @@ public class Fridge
     public void ChangeFridgeItem(FoodItem item, double qty)
     {
         // If the item is already in the fridge, we'll just update the quantity.
-        if (!this.qtyFridge.TryGetValue(item.Id, out var value))
+        if (!this.QtyFridge.TryGetValue(item.Id, out var value))
         {
             throw new ItemNotFoundException(item.Id.ToString());
         }
 
         // Update the item
         this.InFridge[item.Id] = item;
-        this.qtyFridge[item.Id] = qty;
+        this.QtyFridge[item.Id] = qty;
     }
 
     /// <summary>
@@ -184,7 +184,7 @@ public class Fridge
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
-        foreach (var item in this.qtyFridge)
+        foreach (var item in this.QtyFridge)
         {
             sb.Append(item.Key)
             .Append(':')

@@ -3,9 +3,13 @@
 // </copyright>
 
 using System;
+using System.IO;
+using System.Net;
 using System.Reactive.Linq;
+using Avalonia.Controls.ApplicationLifetimes;
 using MealPlanner.Models;
 using MealPlanner.TempServices;
+using Newtonsoft.Json;
 using PlannerEngine.FoodStuff;
 using PlannerEngine.GoalStuff;
 using PlannerEngine.PlanStuff;
@@ -33,11 +37,24 @@ public class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel()
     {
         this.fridge = new Fridge();
+        try
+        {
+            var temp = ReadProductFromFile("./fridge.json");
+            if (temp != null)
+            {
+                fridge = temp;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
         this.currentGoal = new DailyGoal();
         this.currentPlan = new DailyPlan(DateTime.Today, this.currentGoal);
         foreach (var meal in Enum.GetValues(typeof(MealType)))
         {
-             this.currentPlan.Plates.Add(new Plate(DateTime.Today, (MealType)meal));
+            this.currentPlan.Plates.Add(new Plate(DateTime.Today, (MealType)meal));
         }
 
         var service = new FoodItemService(this.fridge);
@@ -63,14 +80,65 @@ public class MainWindowViewModel : ViewModelBase
         this.contentViewModel = new MainMenuViewModel();
     }
 
+    public void OnExit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+    {
+        try
+        {
+            this.WriteProductToFile(this.fridge, "./fridge.json");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error writing file");
+            Console.WriteLine(ex);
+        }
+    }
+
+    private static Fridge? ReadProductFromFile(string filePath)
+    {
+        // Read the JSON file contents
+        string json = System.IO.File.ReadAllText(filePath);
+
+        try
+        {
+            // Deserialize JSON to Product object
+            var product = JsonConvert.DeserializeObject<Fridge>(json);
+            return product;
+        }
+        catch (JsonException ex)
+        {
+            // Handle JSON deserialization errors
+            Console.WriteLine("Error deserializing JSON: " + ex.Message);
+            return null;
+        }
+    }
+
+    private void WriteProductToFile(Fridge product, string filePath)
+    {
+        try
+        {
+            // Serialize Product object to JSON
+            var json = JsonConvert.SerializeObject(product, Formatting.Indented);
+
+            // Write JSON to file
+            System.IO.File.WriteAllText(filePath, json);
+
+            Console.WriteLine("Product serialized and saved to file successfully.");
+        }
+        catch (JsonException ex)
+        {
+            // Handle JSON serialization errors
+            Console.WriteLine("Error serializing JSON: " + ex.Message);
+        }
+    }
+
     /// <summary>
     /// Gets FoodItemViewModel FoodItemList.
     /// </summary>
     public FoodItemViewModel FoodItemList { get; }
-    
+
     public DailyPlannerViewModel DailyPlanView { get; }
-    
-    
+
+
     public GoalViewModel GoalView { get; }
 
     /// <summary>
@@ -101,7 +169,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         this.ContentViewModel = new MainMenuViewModel();
     }
-    
+
     /// <summary>
     /// Adds a new item by calling AddItem with an empty object.
     /// </summary>
@@ -124,28 +192,29 @@ public class MainWindowViewModel : ViewModelBase
             .Take(1)
             .Subscribe(
                 newItem =>
-            {
-                // If the OK button was pressed
-                if (newItem != null)
                 {
-                    if (newItem.IsEdited)
+                    // If the OK button was pressed
+                    if (newItem != null)
                     {
-                        this.fridge.ChangeFridgeItem(newItem.Item, newItem.Quantity);
+                        if (newItem.IsEdited)
+                        {
+                            this.fridge.ChangeFridgeItem(newItem.Item, newItem.Quantity);
+                        }
+                        else
+                        {
+                            this.FoodItemList.ListItems.Add(newItem);
+                            this.fridge.AddToFridge(newItem.Item, newItem.Quantity);
+                        }
                     }
-                    else
-                    {
-                        this.FoodItemList.ListItems.Add(newItem);
-                        this.fridge.AddToFridge(newItem.Item, newItem.Quantity);
-                    }
-                }
 
-                // Else, the Cancel button was pressed. Nothing really changes anyways
+                    // Else, the Cancel button was pressed. Nothing really changes anyways
 
-                // Regardless of which button was clicked
-                this.ContentViewModel = this.FoodItemList;
-                Console.WriteLine(this.fridge);
-            });
+                    // Regardless of which button was clicked
+                    this.ContentViewModel = this.FoodItemList;
+                    Console.WriteLine(this.fridge);
+                });
 
         this.ContentViewModel = addFoodItemViewModel;
     }
+
 }

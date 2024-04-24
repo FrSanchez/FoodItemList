@@ -4,14 +4,65 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:MealPlanner.Views"
              xmlns:vm="using:MealPlanner.ViewModels"
+             xmlns:b="using:MealPlanner.Behaviors"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+             xmlns:idd="clr-namespace:Avalonia.Xaml.Interactions.DragAndDrop;assembly=Avalonia.Xaml.Interactions.DragAndDrop"
              x:DataType="vm:DailyPlannerViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MealPlanner.Views.DailyPlannerView">
+    
+    <UserControl.Resources>
+        <!-- IconGrabber, MIT License, author: Primer, taken from: https://www.svgrepo.com/svg/347759/grabber -->
+        <PathGeometry x:Key="IconGrabberGeometry">M15 18a1 1 0 100-2 1 1 0 000 2zm1-6a1 1 0 11-2 0 1 1 0 012 0zm-7 6a1 1 0 100-2 1 1 0 000 2zm0-5a1 1 0 100-2 1 1 0 000 2zm7-6a1 1 0 11-2 0 1 1 0 012 0zM9 8a1 1 0 100-2 1 1 0 000 2z</PathGeometry>
+        <GeometryDrawing x:Key="IconGrabber" Brush="Black" Geometry="{StaticResource IconGrabberGeometry}" />
+    </UserControl.Resources>
+    
+    <UserControl.Styles>
+        <Style Selector="ListBox.ItemsDragAndDrop">
+            <Style.Resources>
+                <b:ItemsListBoxDropHandler x:Key="ItemsListBoxDropHandler" />
+            </Style.Resources>
+            <Setter Property="(i:Interaction.Behaviors)">
+                <i:BehaviorCollectionTemplate>
+                    <i:BehaviorCollection>
+                        <idd:ContextDropBehavior Handler="{StaticResource ItemsListBoxDropHandler}" />
+                    </i:BehaviorCollection>
+                </i:BehaviorCollectionTemplate>
+            </Setter>
+        </Style>
+        
+        <Style Selector="ListBox.ItemsDragAndDrop ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="(i:Interaction.Behaviors)">
+                <i:BehaviorCollectionTemplate>
+                    <i:BehaviorCollection>
+                        <idd:ContextDragBehavior HorizontalDragThreshold="3" VerticalDragThreshold="3" />
+                    </i:BehaviorCollection>
+                </i:BehaviorCollectionTemplate>
+            </Setter>
+        </Style>
+        
+    </UserControl.Styles>
+
     <DockPanel Margin="4" HorizontalAlignment="Center">
         <Label DockPanel.Dock="Top" Content="{Binding Date}"/>
+        <DockPanel>
         <StackPanel Orientation="Horizontal">
-            <views:FridgeView/>
-            <ItemsControl ItemsSource="{Binding Plates}">
+            <ListBox ItemsSource="{Binding FridgeItems}"
+                     Classes="ItemsDragAndDrop">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding   Item.Name}"/>
+                        <Label Content="{Binding Item.ServingSize, StringFormat={}{0:0.0%}}"/>
+                        <Label Content="{Binding Item.Unit}"/>
+                        <!--             <Label Content="{Binding Categories, Converter={StaticResource FoodCategoriesConverter}}"/> -->
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <ItemsControl ItemsSource="{Binding Plates}"
+                          Classes="ItemsDragAndDrop">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>
@@ -24,7 +75,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-        
+        </DockPanel>
         <Button DockPanel.Dock="Bottom"
                 HorizontalAlignment="Center" Width="300"
                 HorizontalContentAlignment="Center"
