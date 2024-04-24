@@ -10,14 +10,17 @@ namespace ToDoList.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         private ViewModelBase _contentViewModel;
+        private readonly Fridge _fridge;
 
         //this has a dependency on the ToDoListService
 
         public MainWindowViewModel()
         {
+            var fService = new FridgeService();
+            _fridge = fService.getItems();
             var service = new FoodItemService();
             FoodItem = new FoodItemViewModel(service.GetItems());
-            Plan = new PlanViewModel();
+            Plan = new PlanViewModel(_fridge);
             GoalView = new GoalViewModel();
             _contentViewModel = new MenuViewModel();
         }

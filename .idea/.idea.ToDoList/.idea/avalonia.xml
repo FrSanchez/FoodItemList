@@ -8,6 +8,7 @@
         <entry key="ToDoList/Views/AddItemView.axaml" value="ToDoList/ToDoList.csproj" />
         <entry key="ToDoList/Views/FoodCategoryView.axaml" value="ToDoList/ToDoList.csproj" />
         <entry key="ToDoList/Views/FoodItemView.axaml" value="ToDoList/ToDoList.csproj" />
+        <entry key="ToDoList/Views/FridgeView.axaml" value="ToDoList/ToDoList.csproj" />
         <entry key="ToDoList/Views/GoalView.axaml" value="ToDoList/ToDoList.csproj" />
         <entry key="ToDoList/Views/MainWindow.axaml" value="ToDoList/ToDoList.csproj" />
         <entry key="ToDoList/Views/MenuView.axaml" value="ToDoList/ToDoList.csproj" />

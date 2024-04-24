@@ -8,21 +8,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02bc7405-7f01-47ca-90f8-7aac247ff512" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/GoalViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/MenuViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoList/Views/GoalView.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoList/Views/GoalView.axaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoList/Views/PlanView.axaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoList/Views/PlanView.axaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/DataModel/Fridge.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Services/FridgeService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/ViewModels/FridgeViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Views/FridgeView.axaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ToDoList/Views/FridgeView.axaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/avalonia.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/avalonia.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ToDoList/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList/ViewModels/AddItemViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/ViewModels/AddItemViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/DataModel/FoodItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/DataModel/FoodItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/ToDoList.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/ToDoList.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/AddItemView.axaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList/Views/FoodItemView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/FoodItemView.axaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoList/Views/MainWindow.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/MainWindow.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/Views/PlanView.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/Views/PlanView.axaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +30,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/56/3f839428/KeyValuePair`2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/83/75c41649/Type.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/ef/83eebd5e/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87bed8ddb3a8426686194432a8407b75d82200/f4/388f3226/Enum.cs" root0="SKIP_HIGHLIGHTING" />
@@ -104,7 +102,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1713877053367</updated>
-      <workItem from="1713877054399" duration="21181000" />
+      <workItem from="1713877054399" duration="28815000" />
     </task>
     <servers />
   </component>
@@ -129,6 +127,60 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs</url>
+          <line>16</line>
+          <properties documentPath="$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs" initialLine="6" containingFunctionPresentation="Property 'Fridge'">
+            <startOffsets>
+              <option value="276" />
+              <option value="281" />
+            </startOffsets>
+            <endOffsets>
+              <option value="280" />
+              <option value="285" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs</url>
+          <line>22</line>
+          <properties documentPath="$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs" initialLine="21" containingFunctionPresentation="Constructor 'MainWindowViewModel'">
+            <startOffsets>
+              <option value="637" />
+            </startOffsets>
+            <endOffsets>
+              <option value="671" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs</url>
+          <line>13</line>
+          <properties documentPath="$PROJECT_DIR$/ToDoList/ViewModels/PlanViewModel.cs" initialLine="9" containingFunctionPresentation="Constructor 'PlanViewModel'">
+            <startOffsets>
+              <option value="220" />
+            </startOffsets>
+            <endOffsets>
+              <option value="241" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs</url>
+          <line>19</line>
+          <properties documentPath="$PROJECT_DIR$/ToDoList/ViewModels/MainWindowViewModel.cs" initialLine="18" containingFunctionPresentation="Constructor 'MainWindowViewModel'">
+            <startOffsets>
+              <option value="479" />
+            </startOffsets>
+            <endOffsets>
+              <option value="489" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
